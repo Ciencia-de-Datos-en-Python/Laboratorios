@@ -149,7 +149,8 @@ Para ello, simplemente introduzca git pull origin master en su interfaz de líne
 # Los Tres Estados
 Git tiene tres estados principales en los que se pueden encontrar tus archivos: confirmado (committed), modificado (modified), y preparado (staged). Confirmado: significa que los datos están almacenados de manera segura en tu base de datos local. Modificado: significa que has modificado el archivo pero todavía no lo has confirmado a tu base de datos. Preparado: significa que has marcado un archivo modificado en su versión actual para que vaya en tu próxima confirmación.
 Esto nos lleva a las tres secciones principales de un proyecto de Git: El directorio de Git (Git directory), el directorio de trabajo (working directory), y el área de preparación (staging area).
- 
+ ![Esta es una imagen](https://images1.programmerclick.com/248/db/db3530b8a8738a16b6afba4e0e654420.png)
+
 Directorio de trabajo, área de almacenamiento y el directorio Git.
 El directorio de Git es donde se almacenan los metadatos y la base de datos de objetos para tu proyecto. Es la parte más importante de Git, y es lo que se copia cuando clonas un repositorio desde otra computadora.
 El directorio de trabajo es una copia de una versión del proyecto. Estos archivos se sacan de la base de datos comprimida en el directorio de Git, y se colocan en disco para que los puedas usar o modificar.
@@ -160,6 +161,8 @@ El flujo de trabajo básico en Git es algo así:
 2.	Preparas los archivos, añadiéndolos a tu área de preparación.
 3.	Confirmas los cambios, lo que toma los archivos tal y como están en el área de preparación y almacena esa copia instantánea de manera permanente en tu directorio de Git.
 Si una versión concreta de un archivo está en el directorio de Git, se considera confirmada (committed). Si ha sufrido cambios desde que se obtuvo del repositorio, pero ha sido añadida al área de preparación, está preparada (staged). Y si ha sufrido cambios desde que se obtuvo del repositorio, pero no se ha preparado, está modificada (modified). 
+
+![Esta es una Imagen](https://miro.medium.com/max/1000/0*HeEKExh4Z0nlev1m.png)
  
 # La Línea de Comandos
 Existen muchas formas de usar Git. Por un lado tenemos las herramientas originales de línea de comandos, y por otro lado tenemos una gran variedad de interfaces de usuario con distintas capacidades. La línea de comandos es el único lugar en donde puedes ejecutar todos los comandos de Git - la mayoría de las interfaces gráficas de usuario solo implementan una parte de las características de Git por motivos de simplicidad.
@@ -169,7 +172,7 @@ Git clone es un comando para descargarte el código fuente existente desde un re
 Hay un par de formas de descargar el código fuente, pero principalmente yo prefiero clonar de la forma con https:
 git clone <https://link-con-nombre-del-repositorio>
 Por ejemplo, si queremos descargar un proyecto desde Github, todo lo que necesitamos es hacer clic sobre el botón verde (clonar o descargar), copiar la URL de la caja y pegarla después del comando git clone que he mostrado más arriba.
- 
+ ![ESta es una Imagen](https://www.freecodecamp.org/espanol/news/content/images/size/w1000/2020/12/bootstrap-github-1.png)
 Código fuente de Bootstrap en Github
 Esto hará una copia del proyecto en tu espacio de trabajo local y así podrás empezar a trabajar con él.
 ## 2. Git branch
@@ -193,6 +196,7 @@ Hay algunos pasos que debes seguir para cambiarte exitosamente entre ramas:
 Hay también un comando de acceso directo que te permite crear y cambiarte a esa rama al mismo tiempo:
 git checkout -b <nombre-de-tu-rama>
 Este comando crea una nueva rama en local (-b viene de rama (branch)) y te cambia a la rama que acabas de crear.
+
 ## 4. Git status
 El comando de git status nos da toda la información necesaria sobre la rama actual.
 git status
@@ -201,6 +205,8 @@ Podemos encontrar información como:
 •	Si hay algo para confirmar, enviar o recibir (pull).
 •	Si hay archivos en preparación (staged), sin preparación(unstaged) o que no están recibiendo seguimiento (untracked)
 •	Si hay archivos creados, modificados o eliminados
+
+![Esta es una Imagen](https://www.freecodecamp.org/espanol/news/content/images/size/w1000/2020/12/git-status-1.png)
  git status nos da información acerca del archivo y las ramas
 
 ## 5. Git add
@@ -212,7 +218,9 @@ Añadir todo de una vez:
 git add -A
 Si revisas la captura de pantalla que he dejado en la sección 4, verás que hay nombres de archivos en rojo - esto significa que los archivos sin preparación. Estos archivos no serán incluidos en tus commits hasta que no los añadas.
 Para añadirlos, necesitas usar el git add:
+![Este es un Archivo](https://www.freecodecamp.org/espanol/news/content/images/size/w1000/2020/12/git-add.png)
  Los archivos en verde han sido añadidos a la preparación gracias al git add
+
 Importante: El comando git add no cambia el repositorio y los cambios que no han sido guardados hasta que no utilicemos el comando de confirmación git commit.
 
 ## 6. Git commit
@@ -239,13 +247,15 @@ Esta operación puede generar conflictos que tengamos que resolver manualmente.
 ## 9. Git revert
 A veces, necesitaremos deshacer los cambios que hemos hecho. Hay varias maneras para deshacer nuestros cambios en local y/o en remoto (dependiendo de lo que necesitemos), pero necesitaremos utilizar cuidadosamente estos comandos para evitar borrados no deseados.
 Una manera segura para deshacer nuestras commits es utilizar git revert. Para ver nuestro historial de commits, primero necesitamos utilizar el  git log -- oneline:
+![Esta es una imagen](https://www.freecodecamp.org/espanol/news/content/images/size/w1000/2020/12/histo-rico-git.png)
  histórico de git en mi rama master
 Entonces, solo necesitamos especificar el código de comprobación que encontrarás junto al commit que queremos deshacer:
 git revert
 Después de esto, verás una pantalla como la de abajo -tan solo presiona shift + q para salir:
- 
+![Esta es una imagen](https://www.freecodecamp.org/news/content/images/2020/01/resim-2.png) 
 El comando git revert deshará el commit que le hemos indicado, pero creará un nuevo commit deshaciendo la anterior:
  commit generado con el git revert
+ ![Imagen sin acceso](https://www.freecodecamp.org/espanol/news/content/images/size/w1000/2020/12/git-revert.png)
 La ventaja de utilizar git revert es que no afecta al commit histórico. Esto significa que puedes seguir viendo todos los commits en tu histórico, incluso los revertidos.
 Otra medida de seguridad es que todo sucede en local a no ser que los enviemos al repositorio remoto. Por esto es que git revert es más seguro de usar y es la manera preferida para deshacer los commits.
 ## 10. Git merge
